@@ -1,0 +1,19 @@
+[model]
+name = 'Config'
+layers = [600]
+lat_dim = 128
+drop_out = 0.5
+anneal_cap = 0.2
+total_anneal_steps = 200000
+encoder_type = 'rec_vae_mlp'
+decoder_type = 'rec_vae_mlp'
+train_type = 'rec_vae'
+concepts_k = 4
+tau = 0.2
+alpha = 20
+l_a = 20
+rol = 1e-2
+mask = false
+mask_all = false
+mask_local=false
+masked_graph = [1,1,1,1]
