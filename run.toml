@@ -1,0 +1,75 @@
+[run]
+times = 5 # run times for each ptojects and calculate the mean of test score for report
+
+[projects]
+trainer = ''
+#trainer = 'vae_trainer'
+datasets = ['kuairec']#
+models = ['invpref','mf','loghtgcn']
+#models = ['multivae','multidae','cdae','macridvae','recvae']
+
+#datasets = ['coat','yahoo','reasoner','kuairec','epinions','lastfm','mind','ml-100k','ml-1m','ml-10m','ml-20m','ml-25m',]#
+
+#models = ['macr','dice','exposemf','cause','invpref','mf']
+#models = ['bpr','ebpr','pda','ubpr','relmf','upl','mfdu']#
+
+
+[dataset]
+trainSize = 0.7
+testSize = 0.2
+valSize = 0.1
+dataname = 'ml-100k' # Invalid when this value exists in projects
+label = true
+negative_num = 1
+concact = true # mixed negatives whith positives if concat is true else negatives as a new col
+compression = 'gzip'
+split = false # re-split the data
+split_type = 'rec'
+traintype = 'rec' # ['normal', 'rec', 'rec_neg', 'rec_pairneg', 'rec_full', 'rec_sample']
+evaltype = 'rec_full' # ['normal', 'rec', 'rec_neg', 'rec_pairneg', 'rec_full', 'rec_sample']
+testtype = 'rec_full' # ['normal', 'rec', 'rec_neg', 'rec_pairneg', 'rec_full', 'rec_sample']
+
+
+[test]
+type = 'fullsort' # ['samplesort', 'fullsort']
+patience_max = 100
+evalmetric = 'recall'
+evalatk = 20
+sortType = 'asc' # ['asc', 'desc']
+testmetric = ['recall','hit','mrr','map','ndcg','precision','avg_pop'] #,'tail_percent'
+testmetrick = [1, 5, 10, 20, 30]
+
+[train]
+device = 0
+env_rank = 0
+num_epochs = 1000
+callback = true
+no_cuda = false
+per_device_train_batch_size = 3072
+per_device_eval_batch_size = 3072
+train_dataloader_num_workers = 4
+eval_dataloader_num_workers = 4
+learning_rate = 1e-4
+optimizer_cls = "Adam"
+optimizer_params = {weight_decay = 1e-4}
+seed = [2024,1949,1998,1849,1921]
+steps_saving = 100
+steps_predict = 10
+# output_dir default set is model_results/modelname/dataname, if need reset use 'output_dir = str'
+best_train_loss = 1e10
+best_eval_loss = -1e10
+keep_best_on_train = false
+amp = false
+
+# wandb config
+project_name = 'csc'
+run_name = ''
+run_tags = ['baseline']
+entity_name = 'snippertong'
+
+world_size = -1
+local_rank = -1
+rank = -1
+dist_backend = "nccl"
+master_addr = "localhost"
+master_port = "12345"
